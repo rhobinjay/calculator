@@ -1,11 +1,11 @@
 import sys
-from calculator import argparser
+from calculator._utils import _argparser
 from calculator.calculator import Calculator
 
 
 def main():
     try:
-        args = argparser.parse()
+        args = _argparser.parse()
 
         calculator = Calculator(operation=args.operation, number1=args.number1, number2=args.number2)
         calculator.calculate()

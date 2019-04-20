@@ -16,7 +16,7 @@ setup(
     packages=find_packages(exclude=['docs', 'tests']),
     entry_points={
         'console_scripts': [
-            'calculator=calculator.cli:main',
+            'calculator=calculator.__main__:main',
         ],
     },
     license='MIT',
@@ -24,5 +24,13 @@ setup(
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
-    ]
+    ],
+    package_data={
+        'calculator': ['utils/*'],
+    },
+    install_package_data=True,
+    # install_requires=[
+    #     'argparse',
+    #     'logging',
+    # ],
 )
