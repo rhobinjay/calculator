@@ -1,15 +1,23 @@
 name: Build
 
 on:
-  push:
-    branches:
-      - "*"
+  workflow_call:
+    inputs:
+      DOCKERHUB_USER:
+        type: string
+        required: true
+        description: "DockerHub username"
+    secrets:
+      DOCKERHUB_PASSWORD:
+        required: true
+        description: "DockerHub password"
 
 env:
   DOCKER_TAG: docker.io/${{ vars.DOCKERHUB_USER }}/github-calculator:${{ github.ref_name }}-${{ github.sha }}
 
 jobs:
   build:
+    name: Build and Push Docker Image
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout

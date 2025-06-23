@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - "*"
+
+env:
+  DOCKER_TAG: docker.io/${{ vars.DOCKERHUB_USER }}/github-calculator:${{ github.ref_name }}-${{ github.sha }}
+
+jobs:
+  build:
+    name: Build and Push Docker Image
+    uses: ./.github/workflows/build.yml
+    with:
+      DOCKERHUB_USER: ${{ vars.DOCKERHUB_USER }}
+    secrets:
+      DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+  test:
+    name: Test Image
+    uses: ./.github/workflows/test.yml
+    with:
+      DOCKERHUB_USER: ${{ vars.DOCKERHUB_USER }}
+    secrets:
+      DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
