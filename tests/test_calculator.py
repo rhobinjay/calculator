@@ -1,31 +1,59 @@
-from calculator.calculator import Calculator
-import unittest
+import pytest
+import calculator
+
+# def test_operation_add_int():
+#     result = calculator.add(1, 2)
+#     assert result == 3
+
+# def test_operation_add_float():
+#     result = calculator.add(1.3, 2.5)
+#     assert result == 3.8
+
+def case(given, when, then):
+    return pytest.param(*given, then, id=when)
 
 
-class Test_Calculator(unittest.TestCase):
-
-    def test_add(self):
-        calculator = Calculator(operation="add", number1=4, number2=7)
-        self.assertEqual(calculator.add(), 11)
-
-    def test_subtract(self):
-        calculator = Calculator(operation="subtract", number1=10, number2=7)
-        self.assertEqual(calculator.subtract(), 3)
-
-    def test_calculate(self):
-        calculator = Calculator(operation="add", number1=10, number2=7)
-        calculator.calculate()
-        self.assertEqual(calculator.result, 17)
-        calculator = Calculator(operation="subtract", number1=8, number2=7)
-        calculator.calculate()
-        self.assertEqual(calculator.result, 1)
-
-    def test_get_operation(self):
-        calculator = Calculator(operation="add", number1=10, number2=7)
-        self.assertEqual(calculator.get_operation(), calculator.add)
-        calculator = Calculator(operation="subtract", number1=10, number2=7)
-        self.assertEqual(calculator.get_operation(), calculator.subtract)
+@pytest.mark.parametrize('x,y,expected', [
+    case(
+        given=[1, 2],
+        when='where int',
+        then=3
+    ),
+    case(
+        given=[1.3, 2.5],
+        when='where float',
+        then=3.8
+    ),
+])
+def test_operation_add(x,y,expected):
+    result = calculator.add(x,y)
+    assert result == expected
 
 
-if __name__ == '__main__':
-    unittest.main()
+# @pytest.mark.parametrize('x,y,expected', [
+#     case(
+#         given=[1, 2],
+#         when='where int',
+#         then=3
+#     ),
+#     case(
+#         given=[1.3, 2.5],
+#         when='where float',
+#         then=3.8
+#     ),
+# ])
+# def test_operation_add2(input,expected):
+#     input['x']
+#     input['y']
+#     result = calculator.add(x,y)
+#     assert result == expected
+
+
+
+# @pytest.mark.parametrize('x,y,expected', [
+#     pytest.param(1, 2, 3, id='where_int'),
+#     pytest.param(1.3, 2.5, 3.8, id='where_float')
+# ])
+# def test_operation_add(x,y,expected):
+#     result = calculator.add(x,y)
+#     assert result == expected

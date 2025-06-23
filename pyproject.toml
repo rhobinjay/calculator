@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "calculator"
+version = "0.1.0"
+description = ""
+authors = ["Rhobin Jay Faigones <rhobinjay.faigones@dyson.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pytest = "^7.4.0"
+pylint = "^3.3.7"
+flake8 = "^7.3.0"
+
+[tool.poetry.scripts]
+calculator = "calculator.__main__:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

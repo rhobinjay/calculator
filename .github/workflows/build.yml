@@ -1,0 +1,23 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - "*"
+
+env:
+  DOCKER_TAG: "docker.io/github-calculator:${{ github.sha }}"
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Docker login
+        run: |
+          echo "Logging into Docker Hub registry ..."
+          echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u ${{ vars.DOCKERHUB_USER }} --password-stdin ${{ vars.DOCKERHUB_URL }}
+
+      - name: Build Docker Image
+        run: |
+          docker build -t $DOCKER_TAG .
+          docker push $DOCKER_TAG
