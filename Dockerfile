@@ -16,8 +16,8 @@ LABEL description="My calculator tool." \
 #
 RUN apk update \
     && apk add --no-cache \
-        curl=8.* \
-        bash=5.* \
+        curl~=8 \
+        bash~=5 \
     && rm -rf /var/lib/apt/lists/* \
     && rm /var/cache/apk/*
 
