@@ -6,7 +6,7 @@ on:
       - "*"
 
 env:
-  DOCKER_TAG: docker.io/github-calculator:${{ github.sha }}
+  DOCKER_TAG: docker.io/${{ vars.DOCKERHUB_USER }}/github-calculator:${{ github.sha }}
 
 jobs:
   build:
